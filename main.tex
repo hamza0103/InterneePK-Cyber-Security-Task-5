@@ -1,0 +1,368 @@
+\documentclass[12pt,a4paper]{article}
+
+% --- PACKAGES ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault} 
+\usepackage{geometry}
+\usepackage[table]{xcolor} % <--- THIS FIXED THE ERROR
+\usepackage{setspace}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+
+% --- CONFIGURATION ---
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\definecolor{primary}{RGB}{0, 51, 102}    % Navy Blue
+\definecolor{graytext}{RGB}{80, 80, 80}   % Dark Gray
+\begin{document}
+
+% =========================================================
+% PAGE 1: CENTERED PROFESSIONAL TITLE PAGE
+% =========================================================
+
+\begin{titlepage}
+    \centering
+    \onehalfspacing
+    
+    % --- Top Branding ---
+    \vspace*{0.5cm}
+    {\Huge \bfseries \textcolor{primary}{INTERNEE.PK}} \\[0.2cm]
+    {\Large \textcolor{graytext}{Cyber Security Internship Program}} \\[0.2cm]
+    {\small \textbf{BATCH 2026}}
+    
+    \vspace{3.5cm}
+    
+    % --- The Title Block (The "Power" Section) ---
+    % We use thick lines to frame the title
+    \hrule height 2pt \vspace{0.8cm}
+    
+    {\fontsize{30}{36}\selectfont \textbf{INCIDENT RESPONSE PLAN}} \\[0.5cm]
+    {\Large \textit{Ransomware Simulation \& Defense Protocols}}
+    
+    \vspace{0.8cm} \hrule height 2pt
+    
+    \vspace{3cm}
+    
+    % --- Document Details (Grid Layout) ---
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushleft}
+            \textbf{\textcolor{primary}{PREPARED BY:}} \\
+            Muhammad Hamza Hayat \\
+            Cyber Security Intern
+        \end{flushleft}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushright}
+            \textbf{\textcolor{primary}{SUBMITTED TO:}} \\
+            Internee.pk Management \\
+            Security Operations Center (SOC)
+        \end{flushright}
+    \end{minipage}
+    
+    \vfill
+    
+    % --- Date & Version ---
+    \textbf{Date:} \today \\
+    \textbf{Version:} 1.0 
+    
+    \vspace{1.5cm}
+    
+    % --- Bottom Footer Box ---
+    \fcolorbox{primary}{white}{
+        \begin{minipage}{0.85\textwidth}
+        \centering \vspace{0.3cm}
+        \small \textbf{COMPLIANCE STATEMENT} \\
+his document adheres to \textbf{NIST SP 800-61 Rev. 2} standards for Computer Security Incident Handling.
+        \vspace{0.3cm}
+        \end{minipage}
+    }
+
+\end{titlepage}
+
+% =========================================================
+% PAGE 2: GOVERNANCE & ROLES (FIXED SPACING)
+% =========================================================
+
+\newpage
+\newgeometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+% --- Section 1: Introduction ---
+\section*{1.0 Executive Summary}
+The purpose of this \textbf{Cyber Incident Response Plan (CIRP)} is to provide a structured framework for handling cybersecurity incidents at \textbf{Internee.pk}. By defining clear roles and pre-approved procedures, we aim to reduce the \textit{Mean Time to Respond (MTTR)} and minimize the impact of security incidents on business operations.
+
+% --- Section 2: Scope ---
+\section*{2.0 Scope of Applicability}
+This plan applies to all systems, networks, and data owned or operated by the organization.
+\begin{itemize}
+    \item \textbf{Infrastructure:} Workstations, Servers (Windows/Linux), and Network Devices.
+    \item \textbf{Cloud Assets:} AWS Instances, S3 Buckets, and Hosted Databases.
+    \item \textbf{Users:} All employees, contractors, and interns with network access.
+\end{itemize}
+
+% --- Section 3: The Incident Response Team (IRT) ---
+\section*{3.0 Incident Response Team (IRT)}
+A clearly defined chain of command is critical during a crisis. The following roles constitute the authorized IRT.
+
+
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+% Using \raggedright and \arraybackslash to fix the \hbox stretching errors
+\begin{tabular}{|p{0.32\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|}
+\hline
+\rowcolor{primary} \textbf{\textcolor{white}{ROLE}} & \textbf{\textcolor{white}{RESPONSIBILITIES}} \\ \hline
+
+\textbf{Incident Commander} & 
+Highest authority. Coordinates response, approves containment strategies, and manages stakeholder communication. \\ \hline
+
+\textbf{Lead Security Analyst} & 
+Technical Lead. Investigates logs (SIEM/Wazuh), identifies root causes, and determines breach scope. \\ \hline
+
+\textbf{IT Operations Lead} & 
+Execution. Performs system isolation, password resets, firewall blocking, and backup restoration. \\ \hline
+
+\end{tabular}
+\end{center}
+
+\vfill
+\begin{tcolorbox}[colback=white, colframe=graytext, title=\textbf{Authority to Act}]
+\small The \textbf{Incident Commander} is authorized to sever network connections to the internet without prior approval if a critical threat is detected spreading laterally.
+\end{tcolorbox}
+
+\newpage
+
+% =========================================================
+% PAGE 3: SEVERITY MATRIX & DETECTION (ERROR-FREE)
+% =========================================================
+
+\newpage
+\newgeometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+% --- Section 4: Incident Severity Matrix ---
+\section*{4.0 Incident Severity Matrix}
+To ensure efficient resource allocation, all incidents must be classified upon detection. This matrix determines the urgency and escalation path.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+% We use \raggedright to prevent the underfull \hbox error in narrow columns
+\begin{tabular}{|p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.48\textwidth}|p{0.24\textwidth}|}
+\hline
+\rowcolor{primary} \textbf{\textcolor{white}{SEVERITY}} & \textbf{\textcolor{white}{CRITERIA}} & \textbf{\textcolor{white}{RESPONSE}} \\ \hline
+
+\textbf{\textcolor{red}{CRITICAL}} & 
+Widespread Ransomware, Data Breach of PII, or Total Service Outage. & Immediate (24/7) \\ \hline
+
+\textbf{\textcolor{orange}{HIGH}} & 
+Targeted malware on a server or unauthorized admin access. & Within 1 Hour \\ \hline
+
+\textbf{\textcolor{blue}{MEDIUM}} & 
+Isolated virus on a workstation or suspicious login attempts. & Within 4 Hours \\ \hline
+
+\textbf{LOW} & 
+Spam, Adware, or minor policy violations. & Next Business Day \\ \hline
+
+\end{tabular}
+\end{center}
+
+\vspace{0.8cm}
+
+% --- Section 5: Detection & Analysis ---
+\section*{5.0 Detection \& Analysis Procedures}
+The goal of this phase is to confirm whether a security event is a true incident or a false positive.
+
+\subsection*{5.1 Detection Sources}
+Internee.pk utilizes the following sources for initial detection:
+\begin{itemize}
+    \item \textbf{SIEM Alerts:} Monitoring Wazuh agents for file integrity and log anomalies.
+    \item \textbf{Endpoint Security:} Antivirus and EDR alerts on workstations.
+    \item \textbf{User Reporting:} Employees reporting suspicious emails or system behavior.
+\end{itemize}
+
+\subsection*{5.2 Verification Steps}
+Upon receiving an alert, the Lead Security Analyst must:
+\begin{enumerate}
+    \item \textbf{Analyze:} Review timestamps, source IPs, and user accounts involved.
+    \item \textbf{Correlate:} Check if other systems are showing similar anomalies.
+    \item \textbf{Validate:} Determine if the activity is authorized (e.g., scheduled maintenance).
+\end{enumerate}
+
+\vfill
+\begin{tcolorbox}[colback=primary!5, colframe=primary, title=\textbf{Pro Tip}]
+\small Always assume a "Critical" severity for any alert involving multiple encrypted files until proven otherwise.
+\end{tcolorbox}
+
+\newpage
+
+% =========================================================
+% PAGE 4: RANSOMWARE SIMULATION PLAYBOOK (FIXED)
+% =========================================================
+
+\newpage
+\newgeometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+\section*{6.0 Ransomware Simulation Playbook}
+This section simulates a response to a high-impact ransomware attack. This playbook is designed to be executed immediately upon the detection of encryption artifacts.
+
+\subsection*{6.1 Scenario Overview}
+\begin{itemize}
+    \item \textbf{Trigger:} A Wazuh File Integrity Monitor (FIM) alert detects rapid file extension changes (.crypt) on the Finance Server.
+    \item \textbf{Initial Assessment:} 25\% of files are encrypted; a ransom note is present on the desktop.
+\end{itemize}
+
+\subsection*{6.2 Phase 1: Containment (Stop the Spread)}
+\begin{enumerate}
+    \item \textbf{Network Isolation:} The IT Operations Lead must immediately disable the switch port or disconnect the virtual NIC of the infected server.
+    \item \textbf{Lateral Movement Check:} Block all SMB (Port 445) and RDP (Port 3389) traffic internally to prevent the ransomware from spreading.
+    \item \textbf{Endpoint Lockdown:} Force a global password reset for all Domain Admin accounts to prevent credential harvesting.
+\end{enumerate}
+
+\subsection*{6.3 Phase 2: Eradication \& Investigation}
+\begin{itemize}
+    \item \textbf{Root Cause Analysis:} Use Wazuh logs to identify the "Patient Zero" (the first machine infected).
+    \item \textbf{Malware Removal:} Perform a full disk scan using offline tools. If the infection is deep, the system must be wiped and re-installed from a "Golden Image."
+\end{itemize}
+
+\subsection*{6.4 Phase 3: Recovery \& Restoration}
+% --- Fixed Box Title to avoid Overfull \hbox ---
+\begin{tcolorbox}[colback=red!5, colframe=red, title=\textbf{POLICY: RANSOM NON-PAYMENT}]
+\small Internee.pk maintains a strict policy against paying ransoms. This prevents funding criminal activity and does not guarantee data recovery.
+\end{tcolorbox}
+
+\begin{flushleft} % This kills the \hbox error for the list
+\begin{enumerate}
+    \item \textbf{Backup Validation:} Verify the integrity of the most recent offline backup (Veeam/AWS Snapshots).
+    \item \textbf{Incremental Restore:} Restore data to a "Clean Room" environment first to ensure no malware is hidden.
+    \item \textbf{Production Re-entry:} Gradually bring services back online while keeping monitoring levels at "Maximum" for 72 hours.
+\end{enumerate}
+\end{flushleft}
+
+\vfill
+\begin{center}
+    \small Note: All actions taken during this simulation must be logged in the Incident Chronology for post-mortem analysis.
+\end{center}
+
+
+\newpage
+
+% =========================================================
+% PAGE 5: STAFF TRAINING & EMERGENCY CONTACTS
+% =========================================================
+
+\newpage
+\newgeometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+\section*{7.0 Staff Training \& Awareness}
+Human error is the leading cause of initial compromise. To support this IRP, \textbf{Internee.pk} shall conduct the following training modules for all staff.
+
+\subsection*{7.1 Phishing Simulation}
+\begin{itemize}
+    \item \textbf{Frequency:} Quarterly unannounced simulations.
+    \item \textbf{Objective:} Train users to identify suspicious senders, mismatched URLs, and urgent/threatening language.
+    \item \textbf{Reporting:} Users are instructed to use the "Report Phishing" button rather than deleting the email.
+\end{itemize}
+
+\subsection*{7.2 Incident Reporting Protocol}
+In the event of suspicious system behavior (slow performance, disappearing files, or pop-ups), staff must:
+\begin{enumerate}
+    \item \textbf{Stop:} Cease all activity on the device.
+    \item \textbf{Report:} Call the IT Helpdesk immediately.
+    \item \textbf{Do Not Shutdown:} Leave the machine on but disconnect the Ethernet cable (to preserve RAM artifacts for forensics).
+\end{enumerate}
+
+\vspace{1cm}
+
+\section*{8.0 Emergency Contact List}
+In a "Critical" severity incident, the following contacts are to be used for immediate escalation.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|p{0.3\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}|}
+\hline
+\rowcolor{primary} \textbf{\textcolor{white}{DEPARTMENT}} & \textbf{\textcolor{white}{PRIMARY CONTACT}} & \textbf{\textcolor{white}{PHONE / EXT}} \\ \hline
+
+\textbf{IT Security (SOC)} & Lead Security Analyst & +92-XXX-XXXXXXX \\ \hline
+
+\textbf{Management} & Incident Commander & +92-XXX-XXXXXXX \\ \hline
+
+\textbf{Cloud Provider} & AWS Support (24/7) & 1-800-AWS-HELP \\ \hline
+
+\textbf{Law Enforcement} & FIA Cybercrime Wing & 1991 \\ \hline
+
+\end{tabular}
+\end{center}
+
+\vfill
+\begin{center}
+    \hrule height 1pt \vspace{0.3cm}
+    \textbf{END OF DOCUMENT} \\
+    \small \textit{This plan shall be reviewed and updated annually or after any major security incident.}
+\end{center}
+
+
+% =========================================================
+% PAGE 6: POST-INCIDENT REPORT (PIR) TEMPLATE
+% =========================================================
+
+\newpage
+\newgeometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+\section*{9.0 Post-Incident Report Template}
+This document must be completed within 72 hours of incident resolution. The goal is to identify root causes and improve future response capabilities.
+
+\subsection*{9.1 Incident Summary}
+\begin{tcolorbox}[colback=white, colframe=black, height=4cm]
+\small \textit{Describe the timeline, the systems affected, and the initial point of entry (e.g., Phishing, Unpatched Vulnerability).}
+\end{tcolorbox}
+\subsection*{9.2 Resolution \& Recovery Actions}
+\begin{flushleft}
+\begin{itemize}
+    \item \textbf{Containment Method:} \rule{8cm}{0.4pt}
+    \item \textbf{Backup Success:} [ ] Yes [ ] No (If no, why?)
+    \item \textbf{Data Loss Status:} \rule{8cm}{0.4pt}
+\end{itemize}
+\end{flushleft}
+
+\subsection*{9.3 Lessons Learned \& Improvements}
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+\hline
+\rowcolor{lightgray} \textbf{What went well?} & \textbf{What could be improved?} \\ \hline
+\vspace{1.5cm} & \vspace{1.5cm} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{9.4 Corrective Action Plan}
+\begin{flushleft}
+\begin{enumerate}
+    \item \textbf{Immediate Task:} \rule{8cm}{0.4pt}
+    \item \textbf{Security Patching:} \rule{8cm}{0.4pt}
+    \item \textbf{Staff Retraining Required:} [ ] Yes [ ] No
+\end{enumerate}
+\end{flushleft}
+
+\vfill
+\begin{flushright}
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \hrule
+        \vspace{0.2cm}
+        \textbf{Incident Commander Signature} \\
+        \small Date: \rule{3cm}{0.4pt}
+    \end{minipage}
+\end{flushright}
+
+\newpage
+\section*{References \& Frameworks}
+\begin{flushleft} % Prevents the \hbox stretching error
+\begin{itemize}
+    \item \textbf{MITRE ATT\&CK:} Techniques T1486 (Data Encrypted for Impact) and T1566 (Phishing) were used to model the Ransomware Simulation.
+    \item \textbf{NIST SP 800-61 Rev. 2:} Followed for the Incident Handling Lifecycle standards.
+    \item \textbf{Internee.pk Internship Tasks:} Aligned with Wazuh deployment and secure cloud infrastructure projects.
+\end{itemize}
+\end{flushleft}
+
+      
+\end{document}
